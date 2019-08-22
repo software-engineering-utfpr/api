@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+  yarn: true
+
+branches:
+  only:
+    - master
+deploy:
+  provider: heroku
+  skip_cleanup: true
+  github_token: $github_token
+  on:
+    branch: master
