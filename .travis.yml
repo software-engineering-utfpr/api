@@ -9,8 +9,3 @@ cache:
 branches:
   only:
     - master
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: $heroku_token
