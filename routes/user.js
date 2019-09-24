@@ -23,6 +23,7 @@ router.post('/login', (req, res) => {
             user: {
               id: user._id,
               name: user.name,
+              superuser: user.superuser,
               status: user.status
             }
           });

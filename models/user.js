@@ -42,7 +42,6 @@ module.exports.updateUser = (id, updatedUser, callback) => {
     if (err) callback(err, null);
 
     user.email = updatedUser.email ? updatedUser.email : user.email;
-    user.RA = updatedUser.RA ? updatedUser.RA : user.RA;
     user.name = updatedUser.name ? updatedUser.name : user.name;
     user.password = updatedUser.password ? updatedUser.password : user.password;
     user.superuser = updatedUser.superuser ? updatedUser.superuser : user.superuser;
