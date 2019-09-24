@@ -23,8 +23,7 @@ router.post('/login', (req, res) => {
             manager: {
               id: manager._id,
               name: manager.name,
-              superuser: manager.superuser,
-              status: manager.status
+              superuser: manager.superuser
             }
           });
         }
@@ -77,7 +76,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    email, name, password, superuser, image
+    id, email, name, password, superuser, image
   } = req.body;
 
   const updatedManager = {};
