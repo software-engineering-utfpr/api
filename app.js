@@ -6,6 +6,7 @@ const mongoose = require ('mongoose');
 const getSecret = require('./secrets');
 
 const manager = require ('./routes/manager');
+const user = require ('./routes/user');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -21,6 +22,7 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 
 app.use('/api/managers', manager);
+app.use('/api/users', user);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
