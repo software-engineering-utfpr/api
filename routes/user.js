@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('twin-bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
@@ -14,10 +14,10 @@ router.post('/login', (req, res) => {
     if (err) res.status(400).send('Can\'t log user in');
     if (!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
     else {
-      bcrypt.compare(password, user.password).then((result) => {
+      bcrypt.compare(password, user.password, function(result) {
         if (result) {
           const token = jwt.sign({ id: user._id }, secret);
-          res.status(200).json({
+          return res.status(200).json({
             auth: true,
             token,
             user: {
@@ -26,7 +26,8 @@ router.post('/login', (req, res) => {
               status: user.status
             }
           });
-        } else res.status(401).send('Can\'t log user in, it doesn\'t exist');
+        }
+        return res.status(401).send('Can\'t log user in, it doesn\'t exist');
       });
     }
   });
