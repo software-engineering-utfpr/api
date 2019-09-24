@@ -5,7 +5,7 @@ const logger = require ('morgan');
 const mongoose = require ('mongoose');
 const getSecret = require('./secrets');
 
-const user = require ('./routes/user');
+const manager = require ('./routes/manager');
 
 // Criação das instâncias
 const app = express();
@@ -27,7 +27,7 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 
 // Redireciona o link para sua respectiva rota
-app.use('/api/users', user);
+app.use('/api/managers', manager);
 
 // Setar o caminho da rota & inicializa a API
 app.get('/*', (req, res) => {
