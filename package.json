@@ -13,6 +13,7 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.10",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "twin-bcrypt": "^2.1.1"
   }
