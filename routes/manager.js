@@ -23,7 +23,7 @@ router.post('/login', (req, res) => {
             manager: {
               id: manager._id,
               name: manager.name,
-              supermanager: manager.supermanager,
+              superuser: manager.superuser,
               status: manager.status
             }
           });
@@ -56,14 +56,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    email, name, password, supermanager, image
+    email, name, password, superuser, image
   } = req.body;
 
   const newManager = {};
   newManager.email = email;
   newManager.name = name;
   newManager.password = bcrypt.hashSync(password, 10);
-  newManager.supermanager = supermanager;
+  newManager.superuser = superuser;
   newManager.image = image;
 
   Manager.addManager(newManager, (err, manager) => {
@@ -77,7 +77,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    email, name, password, supermanager, image
+    email, name, password, superuser, image
   } = req.body;
 
   const updatedManager = {};
@@ -91,7 +91,7 @@ router.put('/', (req, res) => {
   updatedManager.email = email;
   updatedManager.name = name;
   updatedManager.managername = managername;
-  updatedManager.supermanager = supermanager;
+  updatedManager.superuser = superuser;
   updatedManager.image = image;
 
   Manager.updateManager(id, updatedManager, (err, manager) => {

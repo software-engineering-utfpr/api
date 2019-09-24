@@ -7,7 +7,7 @@ const ManagerSchema = new Schema({
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
   password: { type: String, required: true },
-  supermanager: { type: Boolean, default: false, required: true },
+  superuser: { type: Boolean, default: false, required: true },
   image: { type: String, required: true }
 }, { timestamps: true });
 
@@ -43,7 +43,7 @@ module.exports.updateManager = (id, updatedManager, callback) => {
     manager.email = updatedManager.email ? updatedManager.email : manager.email;
     manager.name = updatedManager.name ? updatedManager.name : manager.name;
     manager.password = updatedManager.password ? updatedManager.password : manager.password;
-    manager.supermanager = updatedManager.supermanager != '' ? updatedManager.supermanager : manager.supermanager;
+    manager.superuser = updatedManager.superuser != '' ? updatedManager.superuser : manager.superuser;
     manager.image = updatedManager.image ? updatedManager.image : manager.image;
 
     manager.save(callback);
