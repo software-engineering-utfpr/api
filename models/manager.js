@@ -7,7 +7,7 @@ const ManagerSchema = new Schema({
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
   password: { type: String, required: true },
-  supermanager: { type: Boolean, required: true },
+  supermanager: { type: Boolean, default: false, required: true },
   image: { type: String, required: true }
 }, { timestamps: true });
 
@@ -31,7 +31,6 @@ module.exports.addManager = (manager, callback) => {
   newManager.email = manager.email;
   newManager.name = manager.name;
   newManager.password = manager.password;
-  newManager.supermanager = manager.supermanager;
   newManager.image = manager.image;
 
   newManager.save(callback);
