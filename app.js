@@ -1,5 +1,3 @@
-// server.js
-
 // Importação das dependências…
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,7 +5,7 @@ const logger = require ('morgan');
 const mongoose = require ('mongoose');
 const getSecret = require('./secrets');
 
-// const usuario = require ('./routes/usuario');
+const user = require ('./routes/user');
 
 // Criação das instâncias
 const app = express();
@@ -29,7 +27,7 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 
 // Redireciona o link para sua respectiva rota
-// app.use('/api/usuarios', usuario);
+app.use('/api/users', user);
 
 // Setar o caminho da rota & inicializa a API
 app.get('/*', (req, res) => {
