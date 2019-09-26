@@ -4,7 +4,7 @@ const uniquevalidator = require('mongoose-unique-validator');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  telefone: { type: String, unique: true, required: true },
+  phone: { type: String, unique: true, required: true },
   cpf: { type: String, required: true },
   name: { type: String, required: true },
   password: { type: String, required: true },
@@ -30,7 +30,7 @@ module.exports.getUserById = (id, callback) => {
 module.exports.addUser = (user, callback) => {
   const newUser = new User();
 
-  newUser.telefone = user.telefone;
+  newUser.phone = user.phone;
   newUser.cpf = user.cpf;
   newUser.name = user.name;
   newUser.password = user.password;
@@ -43,7 +43,7 @@ module.exports.updateUser = (id, updatedUser, callback) => {
   User.getUserById(id, (err, user) => {
     if (err) callback(err, null);
 
-    user.telefone = updatedUser.telefone ? updatedUser.telefone : user.telefone;
+    user.phone = updatedUser.phone ? updatedUser.phone : user.phone;
     user.cpf = updatedUser.cpf ? updatedUser.cpf : user.cpf;
     user.name = updatedUser.name ? updatedUser.name : user.name;
     user.password = updatedUser.password ? updatedUser.password : user.password;

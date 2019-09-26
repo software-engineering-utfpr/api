@@ -89,7 +89,6 @@ router.put('/', (req, res) => {
 
   updatedManager.email = email;
   updatedManager.name = name;
-  updatedManager.managername = managername;
   updatedManager.superuser = superuser;
   updatedManager.image = image;
 

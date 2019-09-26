@@ -7,10 +7,10 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-  const { telefone, password } = req.body;
+  const { phone, password } = req.body;
   const secret = 'secret';
 
-  User.findOne({ telefone }, (err, user) => {
+  User.findOne({ phone }, (err, user) => {
     if (err) res.status(400).send('Can\'t log user in');
     if (!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
     else {
@@ -49,11 +49,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    telefone, cpf, name, password, image
+    phone, cpf, name, password, image
   } = req.body;
 
   const newUser = {};
-  newUser.telefone = telefone;
+  newUser.phone = phone;
   newUser.cpf = cpf;
   newUser.name = name;
   newUser.password = bcrypt.hashSync(password, 10);
@@ -70,7 +70,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, telefone, cpf, name, password, image
+    id, phone, cpf, name, password, image
   } = req.body;
 
   const updatedUser = {};
@@ -81,7 +81,7 @@ router.put('/', (req, res) => {
     updatedUser.password = undefined;
   }
 
-  updatedUser.telefone = telefone;
+  updatedUser.phone = phone;
   updatedUser.cpf = cpf;
   updatedUser.name = name;
   updatedUser.username = username;
