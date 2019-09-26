@@ -11,8 +11,8 @@ router.post('/login', (req, res) => {
   const secret = 'secret';
 
   User.findOne({ phone }, (err, user) => {
-    if (err) res.status(400).send('Can\'t log user in');
-    if (!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
+    if(err) res.status(400).send('Can\'t log user in');
+    if(!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
     else {
       bcrypt.compare(password, user.password, function(result) {
         if (result) {

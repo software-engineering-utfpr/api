@@ -11,8 +11,8 @@ router.post('/login', (req, res) => {
   const secret = 'secret';
 
   Manager.findOne({ email }, (err, manager) => {
-    if (err) res.status(400).send('Can\'t log manager in');
-    if (!manager) res.status(401).send('Can\'t log manager in, it doesn\'t exist');
+    if(err) res.status(400).send('Can\'t log manager in');
+    if(!manager) res.status(401).send('Can\'t log manager in, it doesn\'t exist');
     else {
       bcrypt.compare(password, manager.password, function(result) {
         if (result) {
