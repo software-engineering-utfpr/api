@@ -79,7 +79,7 @@ router.put('/', (req, res) => {
 
   const updatedManager = {};
 
-  if (password !== undefined) {
+  if(password !== undefined) {
     updatedManager.password = bcrypt.hashSync(password, 10);
   } else {
     updatedManager.password = undefined;
