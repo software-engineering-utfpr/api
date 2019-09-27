@@ -5,6 +5,7 @@ const logger = require ('morgan');
 const mongoose = require ('mongoose');
 const getSecret = require('./secrets');
 
+const game = require ('./routes/game');
 const manager = require ('./routes/manager');
 const user = require ('./routes/user');
 
@@ -21,6 +22,7 @@ app.use(logger('dev'));
 
 app.use(express.static('public'));
 
+app.use('/api/games', game);
 app.use('/api/managers', manager);
 app.use('/api/users', user);
 
