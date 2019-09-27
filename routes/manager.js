@@ -55,15 +55,13 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    email, name, password, superuser, image
+    email, name, password
   } = req.body;
 
   const newManager = {};
   newManager.email = email;
   newManager.name = name;
   newManager.password = bcrypt.hashSync(password, 10);
-  newManager.superuser = superuser;
-  newManager.image = image;
 
   Manager.addManager(newManager, (err, manager) => {
     if (err) {

@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    phone, cpf, name, password, image
+    phone, cpf, name, password
   } = req.body;
 
   const newUser = {};
@@ -57,7 +57,6 @@ router.post('/', (req, res) => {
   newUser.cpf = cpf;
   newUser.name = name;
   newUser.password = bcrypt.hashSync(password, 10);
-  newUser.image = image;
 
   User.addUser(newUser, (err, user) => {
     if (err) {
