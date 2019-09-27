@@ -23,12 +23,12 @@ module.exports.getGameById = (id, callback) => {
   Game.findOne({ _id: id }, callback);
 };
 
-module.exports.addGame = (Game, callback) => {
+module.exports.addGame = (game, callback) => {
   const newGame = new Game();
 
-  newGame.name = Game.name;
-  newGame.link = Game.link;
-  newGame.image = Game.image ? Game.image : newGame.image;
+  newGame.name = game.name;
+  newGame.link = game.link;
+  newGame.image = game.image ? game.image : newGame.image;
 
   newGame.save(callback);
 };
