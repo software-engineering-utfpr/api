@@ -8,7 +8,7 @@ const ManagerSchema = new Schema({
   name: { type: String, required: true },
   password: { type: String, required: true },
   superuser: { type: Boolean, default: false, required: true },
-  image: { type: String, required: true }
+  image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true }
 }, { timestamps: true });
 
 ManagerSchema.plugin(uniquevalidator);
@@ -31,7 +31,6 @@ module.exports.addManager = (manager, callback) => {
   newManager.email = manager.email;
   newManager.name = manager.name;
   newManager.password = manager.password;
-  newManager.image = manager.image;
 
   newManager.save(callback);
 };

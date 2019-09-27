@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   cpf: { type: String, required: true },
   name: { type: String, required: true },
   password: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true },
   googleID: { type: String, required: false },
   facebookID: { type: String, required: false }
 }, { timestamps: true });
@@ -34,7 +34,6 @@ module.exports.addUser = (user, callback) => {
   newUser.cpf = user.cpf;
   newUser.name = user.name;
   newUser.password = user.password;
-  newUser.image = user.image;
 
   newUser.save(callback);
 };
