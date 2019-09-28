@@ -27,6 +27,21 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/loginFacebook', (req, res) => {
+  const { id } = req.body;
+  const secret = 'secret';
+
+  User.findById({ _id: id }, (err, user) => {
+    if(err) res.status(400).send(err);
+
+    const token = jwt.sign({ id }, secret);
+
+    res.status(200).json({
+      auth: true, token, user
+    });
+  });
+});
+
 router.get('/', (req, res) => {
   User.getAllUsers((err, users) => {
     if (err) {
