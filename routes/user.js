@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    phone, cpf, name, password
+    phone, cpf, name, facebookID, image, password
   } = req.body;
 
   const newUser = {};
@@ -57,6 +57,8 @@ router.post('/', (req, res) => {
   newUser.cpf = cpf;
   newUser.name = name;
   newUser.password = bcrypt.hashSync(password, 10);
+  newUser.image = image;
+  newUser.facebookID = facebookID;
 
   User.addUser(newUser, (err, user) => {
     if (err) {
@@ -69,7 +71,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, phone, cpf, name, password, image
+    id, phone, cpf, name, password, image, facebookID
   } = req.body;
 
   const updatedUser = {};
@@ -84,6 +86,7 @@ router.put('/', (req, res) => {
   updatedUser.cpf = cpf;
   updatedUser.name = name;
   updatedUser.image = image;
+  updatedUser.facebookID = facebookID;
 
   User.updateUser(id, updatedUser, (err, user) => {
     if (err) {
