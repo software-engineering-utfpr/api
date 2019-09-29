@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/searchByLink/:link', (req, res, next) => {
   gplay.search({
     term: req.params.link,
-    num: 1
+    num: 10
   }).then(response => res.json(response))
   .catch(err => next(err));
 });
