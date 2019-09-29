@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   phone: { type: String, unique: true, required: true },
   cpf: { type: String, required: true },
   name: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String },
   image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true },
   facebookID: { type: String, default: '', required: false }
 }, { timestamps: true });
