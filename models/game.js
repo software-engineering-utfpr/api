@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const GameSchema = new Schema({
   appId: { type: String, required: true, unique: true },
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   developer: { type: String, required: true },
   link: { type: String, required: true },
   score: { type: Number },
