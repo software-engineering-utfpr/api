@@ -89,7 +89,6 @@ router.put('/', (req, res) => {
   updatedManager.name = name;
   updatedManager.superuser = superuser;
   updatedManager.image = image;
-  console.log(updatedManager);
   Manager.updateManager(id, updatedManager, (err, manager) => {
     if(err) {
       console.log(err);

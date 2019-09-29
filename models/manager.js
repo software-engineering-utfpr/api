@@ -42,7 +42,7 @@ module.exports.updateManager = (id, updatedManager, callback) => {
     manager.email = updatedManager.email ? updatedManager.email : manager.email;
     manager.name = updatedManager.name ? updatedManager.name : manager.name;
     manager.password = updatedManager.password ? updatedManager.password : manager.password;
-    manager.superuser = updatedManager.superuser != '' ? updatedManager.superuser : manager.superuser;
+    manager.superuser = updatedManager.superuser !== '' ? updatedManager.superuser : manager.superuser;
     manager.image = updatedManager.image ? updatedManager.image : manager.image;
 
     manager.save(callback);
