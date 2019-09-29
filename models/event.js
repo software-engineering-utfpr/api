@@ -7,6 +7,7 @@ const EventSchema = Schema({
   initialDate: { type: Date, required: true },
   finalDate: { type: Date, required: true },
   allDay: { type: Boolean, required: true },
+  color: { type: String },
   description: { type: String }
 }, { timestamps: true });
 
@@ -30,6 +31,7 @@ module.exports.addEvent = (event, callback) => {
   newEvent.finalDate = event.finalDate;
   newEvent.allDay = event.allDay;
   newEvent.description = event.description;
+  newEvent.color = event.color;
 
   newEvent.save(callback);
 };
@@ -43,6 +45,7 @@ module.exports.updateEvent = (id, updateEvent, callback) => {
     event.finalDate = updateEvent.finalDate ? updateEvent.finalDate : event.finalDate;
     event.allDay = updateEvent.allDay;
     event.description = updateEvent.description;
+    event.color = updateEvent.color ? updateEvent.color : event.color;
 
     event.save(callback);
   });

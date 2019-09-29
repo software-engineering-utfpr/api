@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    name, initialDate, finalDate, allDay, description
+    name, initialDate, finalDate, allDay, description, color
   } = req.body;
 
   const newEvent = {};
@@ -35,6 +35,7 @@ router.post('/', (req, res) => {
   newEvent.finalDate = finalDate;
   newEvent.allDay = allDay;
   newEvent.description = description;
+  newEvent.color = color;
 
   Event.addEvent(newEvent, (err, event) => {
     if (err) {
@@ -47,7 +48,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, name, initialDate, finalDate, allDay, description
+    id, name, initialDate, finalDate, allDay, description, color
   } = req.body;
 
   const updateEvent = {};
@@ -57,6 +58,7 @@ router.put('/', (req, res) => {
   updateEvent.finalDate = finalDate;
   updateEvent.allDay = allDay;
   updateEvent.description = description;
+  updateEvent.color = color;
 
   Event.updateEvent(id, updateEvent, (err, event) => {
     if (err) {
