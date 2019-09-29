@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     if(!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
     else {
       bcrypt.compare(password, user.password, function(result) {
-        if (result) {
+        if(result) {
           const token = jwt.sign({ id: user._id }, secret);
           return res.status(200).json({
             auth: true, token, user
@@ -44,7 +44,7 @@ router.post('/loginFacebook', (req, res) => {
 
 router.get('/', (req, res) => {
   User.getAllUsers((err, users) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find all users \n');
     }
@@ -54,7 +54,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.getUserById(req.params.id, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find the user with that id \n');
     }
@@ -82,7 +82,7 @@ router.post('/', (req, res) => {
   newUser.facebookID = facebookID;
 
   User.addUser(newUser, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t create the user \n');
     }
@@ -110,7 +110,7 @@ router.put('/', (req, res) => {
   updatedUser.facebookID = facebookID;
 
   User.updateUser(id, updatedUser, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this user \n');
     }
@@ -120,7 +120,7 @@ router.put('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   User.deleteUser(req.body.id, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this user \n');
     }

@@ -1,38 +1,36 @@
 const express = require('express');
-const bcrypt = require('twin-bcrypt');
-const jwt = require('jsonwebtoken');
 
 const Game = require('../models/game');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Game.getAllGames((err, Games) => {
-    if (err) {
+  Game.getAllGames((err, games) => {
+    if(err) {
       console.log(err);
-      res.status(400).send('Can\'t find all Games \n');
+      res.status(400).send('Can\'t find all games \n');
     }
-    res.status(200).json(Games);
+    res.status(200).json(games);
   });
 });
 
 router.get('/search/:searchWord', (req, res) => {
-  Game.getGameBySearch(req.params.searchWord, (err, Game) => {
-    if (err) {
+  Game.getGameBySearch(req.params.searchWord, (err, game) => {
+    if(err) {
       console.log(err);
-      res.status(400).send('Can\'t find any Game with that word \n');
+      res.status(400).send('Can\'t find any game with that word \n');
     }
-    res.status(200).json(Game);
+    res.status(200).json(game);
   });
 });
 
 router.get('/:id', (req, res) => {
-  Game.getGameById(req.params.id, (err, Game) => {
-    if (err) {
+  Game.getGameById(req.params.id, (err, game) => {
+    if(err) {
       console.log(err);
-      res.status(400).send('Can\'t find the Game with that id \n');
+      res.status(400).send('Can\'t find the game with that id \n');
     }
-    res.status(200).json(Game);
+    res.status(200).json(game);
   });
 });
 
@@ -46,12 +44,12 @@ router.post('/', (req, res) => {
   newGame.link = link;
   newGame.image = image;
 
-  Game.addGame(newGame, (err, Game) => {
-    if (err) {
+  Game.addGame(newGame, (err, game) => {
+    if(err) {
       console.log(err);
-      res.status(400).send('Can\'t create the Game \n');
+      res.status(400).send('Can\'t create the game \n');
     }
-    res.status(200).json(Game);
+    res.status(200).json(game);
   });
 });
 
@@ -66,18 +64,18 @@ router.put('/', (req, res) => {
   updatedGame.link = link;
   updatedGame.image = image;
 
-  Game.updateGame(id, updatedGame, (err, Game) => {
-    if (err) {
+  Game.updateGame(id, updatedGame, (err, game) => {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this Game \n');
     }
-    res.status(200).json(Game);
+    res.status(200).json(game);
   });
 });
 
 router.delete('/', (req, res) => {
   Game.deleteGame(req.body.id, (err, Game) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this Game \n');
     }

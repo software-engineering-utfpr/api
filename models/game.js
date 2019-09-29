@@ -42,14 +42,14 @@ module.exports.addGame = (game, callback) => {
 };
 
 module.exports.updateGame = (id, updatedGame, callback) => {
-  Game.getGameById(id, (err, Game) => {
+  Game.getGameById(id, (err, game) => {
     if (err) callback(err, null);
 
-    Game.name = updatedGame.name ? updatedGame.name : Game.name;
-    Game.link = updatedGame.link ? updatedGame.link : Game.link;
-    Game.image = updatedGame.image ? updatedGame.image : Game.image;
+    game.name = updatedGame.name ? updatedGame.name : game.name;
+    game.link = updatedGame.link ? updatedGame.link : game.link;
+    game.image = updatedGame.image ? updatedGame.image : game.image;
 
-    Game.save(callback);
+    game.save(callback);
   });
 };
 
