@@ -13,6 +13,12 @@ router.get('/searchByLink/:link', (req, res, next) => {
   .catch(err => next(err));
 });
 
+router.get('/getById/:appId', (req, res, next) => {
+  gplay.app({ appId: req.params.appId })
+    .then(response => res.json(response))
+    .catch(err => next(err));
+});
+
 router.get('/', (req, res) => {
   Game.getAllGames((err, games) => {
     if(err) {
