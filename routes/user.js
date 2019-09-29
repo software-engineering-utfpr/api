@@ -118,8 +118,8 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/', (req, res) => {
-  User.deleteUser(req.body.id, (err, user) => {
+router.delete('/:id', (req, res) => {
+  User.deleteUser(req.params.id, (err, user) => {
     if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this user \n');

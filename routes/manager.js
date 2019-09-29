@@ -99,8 +99,8 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/', (req, res) => {
-  Manager.deleteManager(req.body.id, (err, manager) => {
+router.delete('/:id', (req, res) => {
+  Manager.deleteManager(req.params.id, (err, manager) => {
     if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this manager \n');

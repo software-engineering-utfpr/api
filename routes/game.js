@@ -73,8 +73,8 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/', (req, res) => {
-  Game.deleteGame(req.body.id, (err, game) => {
+router.delete('/:id', (req, res) => {
+  Game.deleteGame(req.params.id, (err, game) => {
     if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this game \n');
