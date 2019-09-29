@@ -74,12 +74,12 @@ router.put('/', (req, res) => {
 });
 
 router.delete('/', (req, res) => {
-  Game.deleteGame(req.body.id, (err, Game) => {
+  Game.deleteGame(req.body.id, (err, game) => {
     if(err) {
       console.log(err);
-      res.status(400).send('Can\'t delete this Game \n');
+      res.status(400).send('Can\'t delete this game \n');
     }
-    res.status(200).json(Game);
+    res.status(200).json(game);
   });
 });
 
