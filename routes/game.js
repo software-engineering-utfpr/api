@@ -1,8 +1,16 @@
 const express = require('express');
+const gplay = require('google-play-scraper');
 
 const Game = require('../models/game');
 
 const router = express.Router();
+
+router.get('/searchByLink/:link', (req, res, next) => {
+  gplay.search({
+    term: req.params.link,
+    num: 1
+  }).then(console.log, console.log);
+});
 
 router.get('/', (req, res) => {
   Game.getAllGames((err, games) => {

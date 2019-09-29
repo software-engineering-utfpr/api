@@ -30,4 +30,4 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
-app.listen(API_PORT, "0.0.0.0", () => console.log(`Carregando na porta: ${API_PORT}`));
+app.listen(API_PORT, '0.0.0.0', () => console.log(`Carregando na porta: ${API_PORT}`));
