@@ -5,8 +5,10 @@ const { Schema } = mongoose;
 
 const GameSchema = new Schema({
   name: { type: String, required: true, unique: true },
+  developer: { type: String, required: true },
   link: { type: String, required: true },
-  image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true }
+  score: { type: Number },
+  image: { type: String, required: true }
 }, { timestamps: true });
 
 GameSchema.plugin(uniquevalidator);
@@ -23,20 +25,14 @@ module.exports.getGameById = (id, callback) => {
   Game.findOne({ _id: id }, callback);
 };
 
-module.exports.getGameBySearch = (searchWord, callback) => {
-  Game.find({
-    $or: [
-      { name: new RegExp(searchWord, 'i') }
-    ]
-  }, callback);
-};
-
 module.exports.addGame = (game, callback) => {
   const newGame = new Game();
 
   newGame.name = game.name;
+  newGame.developer = game.developer;
   newGame.link = game.link;
-  newGame.image = game.image ? game.image : newGame.image;
+  newGame.score = game.score;
+  newGame.image = game.image;
 
   newGame.save(callback);
 };
@@ -46,7 +42,9 @@ module.exports.updateGame = (id, updatedGame, callback) => {
     if (err) callback(err, null);
 
     game.name = updatedGame.name ? updatedGame.name : game.name;
+    game.developer = updatedGame.developer ? updatedGame.developer : game.developer;
     game.link = updatedGame.link ? updatedGame.link : game.link;
+    game.score = updatedGame.score ? updatedGame.score : game.score;
     game.image = updatedGame.image ? updatedGame.image : game.image;
 
     game.save(callback);

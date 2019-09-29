@@ -23,16 +23,6 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/search/:searchWord', (req, res) => {
-  Game.getGameBySearch(req.params.searchWord, (err, game) => {
-    if(err) {
-      console.log(err);
-      res.status(400).send('Can\'t find any game with that word \n');
-    }
-    res.status(200).json(game);
-  });
-});
-
 router.get('/:id', (req, res) => {
   Game.getGameById(req.params.id, (err, game) => {
     if(err) {
@@ -45,12 +35,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    name, link, image
+    name, developer, link, score, image
   } = req.body;
 
   const newGame = {};
   newGame.name = name;
+  newGame.developer = developer;
   newGame.link = link;
+  newGame.score = score;
   newGame.image = image;
 
   Game.addGame(newGame, (err, game) => {
@@ -64,13 +56,15 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, name, link, image
+    id, name, developer, link, score, image
   } = req.body;
 
   const updatedGame = {};
   
   updatedGame.name = name;
+  updatedGame.developer = developer;
   updatedGame.link = link;
+  updatedGame.score = score;
   updatedGame.image = image;
 
   Game.updateGame(id, updatedGame, (err, game) => {
