@@ -9,7 +9,8 @@ router.get('/searchByLink/:link', (req, res, next) => {
   gplay.search({
     term: req.params.link,
     num: 1
-  }).then(console.log, console.log);
+  }).then(response => res.json(response.data))
+  .catch(err => next(err));
 });
 
 router.get('/', (req, res) => {
