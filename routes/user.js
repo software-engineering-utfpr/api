@@ -71,7 +71,13 @@ router.post('/', (req, res) => {
   newUser.phone = phone;
   newUser.cpf = cpf;
   newUser.name = name;
-  newUser.password = bcrypt.hashSync(password, 10);
+
+  if(password !== undefined && password !== '') {
+    newUser.password = bcrypt.hashSync(password, 10);
+  } else {
+    newUser.password = undefined;
+  }
+
   newUser.image = image;
   newUser.facebookID = facebookID;
 
