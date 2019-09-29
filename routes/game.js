@@ -6,6 +6,7 @@ const Game = require('../models/game');
 const router = express.Router();
 
 router.get('/searchByLink/:link', (req, res, next) => {
+  console.log(decodeURI(req.params.link));
   gplay.search({
     term: decodeURI(req.params.link),
     num: 10
