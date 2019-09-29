@@ -8,6 +8,7 @@ const getSecret = require('./secrets');
 const game = require ('./routes/game');
 const manager = require ('./routes/manager');
 const user = require ('./routes/user');
+const event = require ('./routes/event');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -25,9 +26,10 @@ app.use(express.static('public'));
 app.use('/api/games', game);
 app.use('/api/managers', manager);
 app.use('/api/users', user);
+app.use('/api/events', event);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
-app.listen(API_PORT, "0.0.0.0", () => console.log(`Carregando na porta: ${API_PORT}`));
+app.listen(API_PORT, '0.0.0.0', () => console.log(`Carregando na porta: ${API_PORT}`));

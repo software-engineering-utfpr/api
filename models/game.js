@@ -4,9 +4,12 @@ const uniquevalidator = require('mongoose-unique-validator');
 const { Schema } = mongoose;
 
 const GameSchema = new Schema({
-  name: { type: String, required: true, unique: true },
+  appId: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  developer: { type: String, required: true },
   link: { type: String, required: true },
-  image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true }
+  score: { type: Number },
+  image: { type: String, required: true }
 }, { timestamps: true });
 
 GameSchema.plugin(uniquevalidator);
@@ -26,22 +29,28 @@ module.exports.getGameById = (id, callback) => {
 module.exports.addGame = (game, callback) => {
   const newGame = new Game();
 
+  newGame.appId = game.appId;
   newGame.name = game.name;
+  newGame.developer = game.developer;
   newGame.link = game.link;
-  newGame.image = game.image ? game.image : newGame.image;
+  newGame.score = game.score;
+  newGame.image = game.image;
 
   newGame.save(callback);
 };
 
 module.exports.updateGame = (id, updatedGame, callback) => {
-  Game.getGameById(id, (err, Game) => {
+  Game.getGameById(id, (err, game) => {
     if (err) callback(err, null);
 
-    Game.name = updatedGame.name ? updatedGame.name : Game.name;
-    Game.link = updatedGame.link ? updatedGame.link : Game.link;
-    Game.image = updatedGame.image ? updatedGame.image : Game.image;
+    game.appId = updatedGame.appId ? updatedGame.appId : game.appId;
+    game.name = updatedGame.name ? updatedGame.name : game.name;
+    game.developer = updatedGame.developer ? updatedGame.developer : game.developer;
+    game.link = updatedGame.link ? updatedGame.link : game.link;
+    game.score = updatedGame.score ? updatedGame.score : game.score;
+    game.image = updatedGame.image ? updatedGame.image : game.image;
 
-    Game.save(callback);
+    game.save(callback);
   });
 };
 

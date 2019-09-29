@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     if(!manager) res.status(401).send('Can\'t log manager in, it doesn\'t exist');
     else {
       bcrypt.compare(password, manager.password, function(result) {
-        if (result) {
+        if(result) {
           const token = jwt.sign({ id: manager._id }, secret);
           return res.status(200).json({
             auth: true,
@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
 
 router.get('/', (req, res) => {
   Manager.getAllManagers((err, managers) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find all managers \n');
     }
@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Manager.getManagerById(req.params.id, (err, manager) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find the manager with that id \n');
     }
@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
   newManager.password = bcrypt.hashSync(password, 10);
 
   Manager.addManager(newManager, (err, manager) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t create the manager \n');
     }
@@ -91,7 +91,7 @@ router.put('/', (req, res) => {
   updatedManager.image = image;
   console.log(updatedManager);
   Manager.updateManager(id, updatedManager, (err, manager) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this manager \n');
     }
@@ -99,9 +99,9 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/', (req, res) => {
-  Manager.deleteManager(req.body.id, (err, manager) => {
-    if (err) {
+router.delete('/:id', (req, res) => {
+  Manager.deleteManager(req.params.id, (err, manager) => {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this manager \n');
     }

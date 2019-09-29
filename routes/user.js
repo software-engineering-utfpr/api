@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     if(!user) res.status(401).send('Can\'t log user in, it doesn\'t exist');
     else {
       bcrypt.compare(password, user.password, function(result) {
-        if (result) {
+        if(result) {
           const token = jwt.sign({ id: user._id }, secret);
           return res.status(200).json({
             auth: true, token, user
@@ -27,9 +27,24 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/loginFacebook', (req, res) => {
+  const { id } = req.body;
+  const secret = 'secret';
+
+  User.findById({ _id: id }, (err, user) => {
+    if(err) res.status(400).send(err);
+
+    const token = jwt.sign({ id }, secret);
+
+    res.status(200).json({
+      auth: true, token, user
+    });
+  });
+});
+
 router.get('/', (req, res) => {
   User.getAllUsers((err, users) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find all users \n');
     }
@@ -39,7 +54,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.getUserById(req.params.id, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t find the user with that id \n');
     }
@@ -49,17 +64,25 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    phone, cpf, name, password
+    phone, cpf, name, facebookID, image, password
   } = req.body;
 
   const newUser = {};
   newUser.phone = phone;
   newUser.cpf = cpf;
   newUser.name = name;
-  newUser.password = bcrypt.hashSync(password, 10);
+
+  if(password !== undefined && password !== '') {
+    newUser.password = bcrypt.hashSync(password, 10);
+  } else {
+    newUser.password = undefined;
+  }
+
+  newUser.image = image;
+  newUser.facebookID = facebookID;
 
   User.addUser(newUser, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t create the user \n');
     }
@@ -69,7 +92,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, phone, cpf, name, password, image
+    id, phone, cpf, name, password, image, facebookID
   } = req.body;
 
   const updatedUser = {};
@@ -84,9 +107,10 @@ router.put('/', (req, res) => {
   updatedUser.cpf = cpf;
   updatedUser.name = name;
   updatedUser.image = image;
+  updatedUser.facebookID = facebookID;
 
   User.updateUser(id, updatedUser, (err, user) => {
-    if (err) {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this user \n');
     }
@@ -94,9 +118,9 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/', (req, res) => {
-  User.deleteUser(req.body.id, (err, user) => {
-    if (err) {
+router.delete('/:id', (req, res) => {
+  User.deleteUser(req.params.id, (err, user) => {
+    if(err) {
       console.log(err);
       res.status(400).send('Can\'t delete this user \n');
     }
