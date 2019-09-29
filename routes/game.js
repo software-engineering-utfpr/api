@@ -41,10 +41,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    name, developer, link, score, image
+    appId, name, developer, link, score, image
   } = req.body;
 
   const newGame = {};
+  newGame.appId = appId;
   newGame.name = name;
   newGame.developer = developer;
   newGame.link = link;
@@ -62,11 +63,12 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, name, developer, link, score, image
+    id, appId, name, developer, link, score, image
   } = req.body;
 
   const updatedGame = {};
   
+  updatedGame.appId = appId;
   updatedGame.name = name;
   updatedGame.developer = developer;
   updatedGame.link = link;
