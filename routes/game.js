@@ -16,6 +16,16 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/search/:searchWord', (req, res) => {
+  Game.getGameBySearch(req.params.searchWord, (err, Game) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send('Can\'t find any Game with that word \n');
+    }
+    res.status(200).json(Game);
+  });
+});
+
 router.get('/:id', (req, res) => {
   Game.getGameById(req.params.id, (err, Game) => {
     if (err) {

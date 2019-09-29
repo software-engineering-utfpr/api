@@ -23,6 +23,14 @@ module.exports.getGameById = (id, callback) => {
   Game.findOne({ _id: id }, callback);
 };
 
+module.exports.getGameBySearch = (searchWord, callback) => {
+  Game.find({
+    $or: [
+      { name: new RegExp(searchWord, 'i') }
+    ]
+  }, callback);
+};
+
 module.exports.addGame = (game, callback) => {
   const newGame = new Game();
 
