@@ -32,6 +32,7 @@ module.exports.addUser = (user, callback) => {
   newUser.phone = user.phone;
   newUser.cpf = user.cpf;
   newUser.name = user.name;
+  newUser.facebookID = user.facebookID;
   newUser.password = user.password;
 
   newUser.save(callback);
