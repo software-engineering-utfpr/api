@@ -9,6 +9,7 @@ const game = require ('./routes/game');
 const manager = require ('./routes/manager');
 const user = require ('./routes/user');
 const event = require ('./routes/event');
+const leaving = require ('./routes/leaving');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -35,6 +36,7 @@ app.use('/api/games', game);
 app.use('/api/managers', manager);
 app.use('/api/users', user);
 app.use('/api/events', event);
+app.use('/api/leavings', leaving);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
