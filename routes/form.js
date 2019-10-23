@@ -8,6 +8,12 @@ const router = express.Router();
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/';
 
 function scrapeForm(formId, callback) {
+  
+}
+
+router.get('/searchByLink/:formId', (req, res, next) => {
+  const { formId } = req.params;
+
   request(GOOGLE_FORM_URL + formId, function(error, response, html) {
     console.log('ooooooooooooo', error);
     console.log('aaaaaaaaaaaaa', response);
@@ -26,17 +32,9 @@ function scrapeForm(formId, callback) {
       	};
         parsedResults.push(obj);
       });
-
-      return callback(parsedResults, null);
+      res.status(200).json(parsedResults);
     }
-    else return callback(null, error);
-  });
-}
-
-router.get('/searchByLink/:link', (req, res, next) => {
-  scrapeForm(req.params.link, function(data, error) {
-    if(error) res.status(400).send('Can\'t find form \n');
-    else res.json(data);
+    else res.status(400).send('Can\'t find form \n');
   });
 });
 
