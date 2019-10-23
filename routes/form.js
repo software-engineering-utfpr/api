@@ -1,7 +1,45 @@
 const express = require('express');
+var request = require('request');
+var cheerio = require('cheerio');
 const Form = require('../models/form');
 
 const router = express.Router();
+
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/';
+
+function scrapeForm(formId, callback) {
+  request(GOOGLE_FORM_URL + formId, function(error, response, html) {
+    console.log('ooooooooooooo', error);
+    console.log('aaaaaaaaaaaaa', response);
+    console.log('nnnnnnnnnnnnn', html);
+    if(!error && response.statusCode == 200) {
+      var $ = cheerio.load(html);
+      var $form = $('#ss-form');
+
+      var parsedResults = [];
+
+      $('#ss-form .ss-item').each(function(i, element) {
+      	var obj = {
+      		title: $('.ss-q-title', this).text(),
+      		helpText: $('.ss-secondary-text', this).text(),
+      		html: $(this).html()
+      	};
+        parsedResults.push(obj);
+      });
+
+      return callback(parsedResults, null);
+    }
+
+    return callback(null, error);
+  });
+}
+
+router.get('/searchByLink/:link', (req, res, next) => {
+  scrapeForm(req.params.link, function(data, error) {
+    if(error) next(err);
+    else res.json(data);
+  });
+});
 
 router.get('/', (req, res) => {
   Form.getAllForms((err, forms) => {
