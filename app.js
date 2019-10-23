@@ -10,6 +10,7 @@ const manager = require ('./routes/manager');
 const user = require ('./routes/user');
 const event = require ('./routes/event');
 const leaving = require ('./routes/leaving');
+const form = require ('./routes/form');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -37,6 +38,7 @@ app.use('/api/managers', manager);
 app.use('/api/users', user);
 app.use('/api/events', event);
 app.use('/api/leavings', leaving);
+app.use('/api/forms', forms);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
