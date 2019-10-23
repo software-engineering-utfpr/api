@@ -80,6 +80,7 @@ router.post('/', (req, res) => {
 
   newUser.image = image;
   newUser.facebookID = facebookID;
+  newUser.forms = forms;
 
   User.addUser(newUser, (err, user) => {
     if(err) {
@@ -108,6 +109,7 @@ router.put('/', (req, res) => {
   updatedUser.name = name;
   updatedUser.image = image;
   updatedUser.facebookID = facebookID;
+  updatedUser.forms = forms;
 
   User.updateUser(id, updatedUser, (err, user) => {
     if(err) {

@@ -9,7 +9,11 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   password: { type: String },
   image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true },
-  facebookID: { type: String, default: '', required: false }
+  facebookID: { type: String, default: '', required: false },
+  forms: [{
+    form: [{ type: Schema.Types.ObjectId, ref: 'Form' }],
+    status: { type: Boolean, default: false }
+  }]
 }, { timestamps: true });
 
 UserSchema.plugin(uniquevalidator);
@@ -33,6 +37,7 @@ module.exports.addUser = (user, callback) => {
   newUser.cpf = user.cpf;
   newUser.name = user.name;
   newUser.facebookID = user.facebookID;
+  newUser.forms = user.forms;
   newUser.password = user.password;
 
   newUser.save(callback);
@@ -48,6 +53,7 @@ module.exports.updateUser = (id, updatedUser, callback) => {
     user.password = updatedUser.password ? updatedUser.password : user.password;
     user.image = updatedUser.image ? updatedUser.image : user.image;
     user.facebookID = updatedUser.facebookID ? updatedUser.facebookID : user.facebookID;
+    user.forms = updatedUser.forms ? updatedUser.forms : user.forms;
 
     user.save(callback);
   });
