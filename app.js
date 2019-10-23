@@ -38,7 +38,7 @@ app.use('/api/managers', manager);
 app.use('/api/users', user);
 app.use('/api/events', event);
 app.use('/api/leavings', leaving);
-app.use('/api/forms', forms);
+app.use('/api/forms', form);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
