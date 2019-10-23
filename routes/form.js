@@ -47,12 +47,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    name, description, link, expireDate
+    title, description, link, expireDate
   } = req.body;
 
   const newForm = {};
 
-  newForm.name = name;
+  newForm.title = title;
   newForm.description = description;
   newForm.link = link;
   newForm.expireDate = expireDate;
@@ -68,12 +68,12 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, name, description, link, expireDate
+    id, title, description, link, expireDate
   } = req.body;
 
   const updateForm = {};
 
-  updateForm.name = name;
+  updateForm.title = title;
   updateForm.description = description;
   updateForm.link = link;
   updateForm.expireDate = expireDate;
