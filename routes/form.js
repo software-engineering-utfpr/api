@@ -29,14 +29,13 @@ function scrapeForm(formId, callback) {
 
       return callback(parsedResults, null);
     }
-
-    return callback(null, error);
+    else return callback(null, error);
   });
 }
 
 router.get('/searchByLink/:link', (req, res, next) => {
   scrapeForm(req.params.link, function(data, error) {
-    if(error) next(err);
+    if(error) res.status(400).send('Can\'t find form \n');
     else res.json(data);
   });
 });
