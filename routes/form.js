@@ -7,32 +7,19 @@ const router = express.Router();
 
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/';
 
-function scrapeForm(formId, callback) {
-  
-}
-
 router.get('/searchByLink/:formId', (req, res, next) => {
   const { formId } = req.params;
 
   request(GOOGLE_FORM_URL + formId, function(error, response, html) {
-    console.log('ooooooooooooo', error);
-    console.log('aaaaaaaaaaaaa', response);
-    console.log('nnnnnnnnnnnnn', html);
     if(!error && response.statusCode == 200) {
       var $ = cheerio.load(html);
       var $form = $('#ss-form');
 
-      var parsedResults = [];
-
-      $('#ss-form .ss-item').each(function(i, element) {
-      	var obj = {
-      		title: $('.ss-q-title', this).text(),
-      		helpText: $('.ss-secondary-text', this).text(),
-      		html: $(this).html()
-      	};
-        parsedResults.push(obj);
-      });
-      res.status(200).json(parsedResults);
+      const result = {
+        title: $('.freebirdFormviewerViewHeaderTitle').text(),
+        description: $('.freebirdFormviewerViewHeaderDescription').text()
+      };
+      res.status(200).json(result);
     }
     else res.status(400).send('Can\'t find form \n');
   });
@@ -60,11 +47,13 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    link, expireDate
+    name, description, link, expireDate
   } = req.body;
 
   const newForm = {};
 
+  newForm.name = name;
+  newForm.description = description;
   newForm.link = link;
   newForm.expireDate = expireDate;
 
@@ -79,11 +68,13 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, link, expireDate
+    id, name, description, link, expireDate
   } = req.body;
 
   const updateForm = {};
 
+  updateForm.name = name;
+  updateForm.description = description;
   updateForm.link = link;
   updateForm.expireDate = expireDate;
 

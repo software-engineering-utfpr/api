@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const FormSchema = Schema({
+  name: { type: String },
+  description: { type: String },
   link: { type: String, required: true },
   expireDate: { type: Date, required: true }
 }, { timestamps: true });
@@ -22,6 +24,8 @@ module.exports.getFormById = (id, callback) => {
 module.exports.addForm = (form, callback) => {
   const newForm = new Form();
 
+  newForm.name = form.name;
+  newForm.description = form.description;
   newForm.link = form.link;
   newForm.expireDate = form.expireDate;
 
@@ -32,6 +36,8 @@ module.exports.updateForm = (id, updateForm, callback) => {
   Form.getFormById(id, (err, form) => {
     if (err) callback(err, null);
 
+    form.name = updateForm.name ? updateForm.name : form.name;
+    form.description = updateForm.description ? updateForm.description : form.description;
     form.link = updateForm.link ? updateForm.link : form.link;
     form.expireDate = updateForm.expireDate ? updateForm.expireDate : form.expireDate;
 
