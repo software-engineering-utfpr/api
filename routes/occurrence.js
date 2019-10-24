@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     Occurrence.getAllOccurrences((err, occurrences) => {
     if (err) {
       console.log(err);
-      res.status(400).send('Can\'t find all cccurrences \n', err);
+      res.status(400).send('Can\'t find all occurrences \n', err);
     }
     res.status(200).json(occurrences);
   });
@@ -25,15 +25,17 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    item, location, date, photos, description
+    category, location, date, photos, videos, audios, description
   } = req.body;
 
   const newOccurrence = {};
 
-  newOccurrence.item = item;
+  newOccurrence.category = category;
   newOccurrence.location = location;
   newOccurrence.date = date;
   newOccurrence.photos = photos;
+  newOccurrence.videos = videos;
+  newOccurrence.audios = audios;
   newOccurrence.description = description;
 
   Occurrence.addOccurrence(newOccurrence, (err, occurrence) => {
@@ -47,15 +49,17 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    item, location, date, photos, description
+    category, location, date, photos, videos, audios, description
   } = req.body;
 
   const updateOccurrence = {};
 
-  updateOccurrence.item = item;
+  updateOccurrence.category = category;
   updateOccurrence.location = location;
   updateOccurrence.date = date;
   updateOccurrence.photos = photos;
+  updateOccurrence.videos = videos;
+  updateOccurrence.audios = audios;
   updateOccurrence.description = description;
 
   Occurrence.updateOccurrence(id, updateOccurrence, (err, occurrence) => {

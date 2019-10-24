@@ -11,6 +11,8 @@ const user = require ('./routes/user');
 const event = require ('./routes/event');
 const leaving = require ('./routes/leaving');
 const form = require ('./routes/form');
+const occurrence = require ('./routes/occurrence');
+const category = require ('./routes/category');
 
 const app = express();
 const API_PORT = process.env.PORT || 3001;
@@ -39,6 +41,8 @@ app.use('/api/users', user);
 app.use('/api/events', event);
 app.use('/api/leavings', leaving);
 app.use('/api/forms', form);
+app.use('/api/occurrences', occurrence);
+app.use('/api/categories', category);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
