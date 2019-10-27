@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    phone, cpf, name, facebookID, image, password
+    phone, cpf, name, facebookID, image, password, forms
   } = req.body;
 
   const newUser = {};
@@ -93,7 +93,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, phone, cpf, name, password, image, facebookID
+    id, phone, cpf, name, password, image, facebookID, forms
   } = req.body;
 
   const updatedUser = {};
