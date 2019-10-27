@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const UFs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'];
 
 const OccurrenceSchema = Schema({
-  category: [{ type: Schema.Types.ObjectId, ref: 'Category', required: true }],
+  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   location: {
     notUrbanizedArea: { type: Boolean, required: true },
     latitude: { type: String, required: true },
@@ -29,17 +30,18 @@ const Occurrence = mongoose.model('Occurrence', OccurrenceSchema, 'Occurrences')
 module.exports = Occurrence;
 
 module.exports.getAllOccurrences = (callback) => {
-    Occurrence.find(callback);
+  Occurrence.find(callback);
 };
 
 module.exports.getOccurrenceById = (id, callback) => {
-    Occurrence.findOne({ _id: id }, callback);
+  Occurrence.findOne({ _id: id }, callback);
 };
 
 module.exports.addOccurrence = (occurrence, callback) => {
   const newOccurrence = new Occurrence();
 
   newOccurrence.category = occurrence.category;
+  newOccurrence.user = occurrence.user;
   newOccurrence.location = occurrence.location;
   newOccurrence.date = occurrence.date;
   newOccurrence.photos = occurrence.photos;
@@ -51,10 +53,11 @@ module.exports.addOccurrence = (occurrence, callback) => {
 };
 
 module.exports.updateOccurrence = (id, updateOccurrence, callback) => {
-    Occurrence.getOccurrenceById(id, (err, occurrence) => {
+  Occurrence.getOccurrenceById(id, (err, occurrence) => {
     if(err) callback(err, null);
 
     occurrence.category = updateOccurrence.category ? updateOccurrence.category : occurrence.category;
+    occurrence.user = updateOccurrence.user ? updateOccurrence.user : occurrence.user;
     occurrence.location = updateOccurrence.location ? updateOccurrence.location : occurrence.location;
     occurrence.date = updateOccurrence.date ? updateOccurrence.date : occurrence.date;
     occurrence.photos = updateOccurrence.photos ? updateOccurrence.photos : occurrence.photos;
@@ -67,5 +70,5 @@ module.exports.updateOccurrence = (id, updateOccurrence, callback) => {
 };
 
 module.exports.deleteOccurrence = (id, callback) => {
-    Occurrence.deleteOne({ _id: id }, callback);
+  Occurrence.deleteOne({ _id: id }, callback);
 };

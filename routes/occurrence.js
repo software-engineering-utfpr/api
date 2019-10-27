@@ -4,7 +4,7 @@ const Occurrence = require('../models/occurrence');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    Occurrence.getAllOccurrences((err, occurrences) => {
+  Occurrence.getAllOccurrences((err, occurrences) => {
     if (err) {
       console.log(err);
       res.status(400).send('Can\'t find all occurrences \n', err);
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Occurrence.getOccurrenceById(req.params.id, (err, occurrence) => {
+  Occurrence.getOccurrenceById(req.params.id, (err, occurrence) => {
     if (err) {
       console.log(err);
       res.status(400).send('Can\'t find this occurrence \n', err);
@@ -25,12 +25,13 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    category, location, date, photos, videos, audios, description
+    category, user, location, date, photos, videos, audios, description
   } = req.body;
 
   const newOccurrence = {};
 
   newOccurrence.category = category;
+  newOccurrence.user = user;
   newOccurrence.location = location;
   newOccurrence.date = date;
   newOccurrence.photos = photos;
@@ -49,12 +50,13 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    category, location, date, photos, videos, audios, description
+    category, user, location, date, photos, videos, audios, description
   } = req.body;
 
   const updateOccurrence = {};
 
   updateOccurrence.category = category;
+  updateOccurrence.user = user;
   updateOccurrence.location = location;
   updateOccurrence.date = date;
   updateOccurrence.photos = photos;
