@@ -63,7 +63,7 @@ module.exports.updateFormsUser = (id, updatedUser, callback) => {
   User.getUserById(id, (err, user) => {
     if (err) callback(err, null);
 
-    updatedUser.forms = updatedUser.forms;
+    user.forms = updatedUser.forms;
 
     user.save(callback);
   });
