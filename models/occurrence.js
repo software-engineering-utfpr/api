@@ -37,6 +37,10 @@ module.exports.getOccurrenceById = (id, callback) => {
   Occurrence.findOne({ _id: id }, callback);
 };
 
+module.exports.getOccurrenceByUser = (id, callback) => {
+  Occurrence.findOne({ user: id }, callback);
+};
+
 module.exports.addOccurrence = (occurrence, callback) => {
   const newOccurrence = new Occurrence();
 

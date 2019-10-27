@@ -23,6 +23,16 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.get('/user/:id', (req, res) => {
+  Occurrence.getOccurrenceByUser(req.params.id, (err, occurrences) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send('Can\'t find the occurrences \n', err);
+    }
+    res.status(200).json(occurrences);
+  });
+});
+
 router.post('/', (req, res) => {
   const {
     category, user, location, date, photos, videos, audios, description
