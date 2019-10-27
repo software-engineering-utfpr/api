@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1569545813/images_jxiacp.png', required: true },
   facebookID: { type: String, default: '', required: false },
   forms: [{
-    form: [{ type: Schema.Types.ObjectId, ref: 'Form' }],
+    form: { type: Schema.Types.ObjectId, ref: 'Form' },
     visitedAt: { type: Date, default: Date.now }
   }]
 }, { timestamps: true });
