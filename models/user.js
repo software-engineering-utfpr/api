@@ -53,17 +53,16 @@ module.exports.updateUser = (id, updatedUser, callback) => {
     user.password = updatedUser.password ? updatedUser.password : user.password;
     user.image = updatedUser.image ? updatedUser.image : user.image;
     user.facebookID = updatedUser.facebookID ? updatedUser.facebookID : user.facebookID;
-    user.forms = updatedUser.forms ? updatedUser.forms : user.forms;
 
     user.save(callback);
   });
 };
 
-module.exports.updateFormsUser = (id, updatedUser, callback) => {
+module.exports.updateFormsUser = (id, forms, callback) => {
   User.getUserById(id, (err, user) => {
     if(err) callback(err, null);
 
-    user.forms = updatedUser.forms;
+    user.forms = forms;
 
     user.save(callback);
   });

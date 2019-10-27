@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    phone, cpf, name, facebookID, image, password, forms
+    phone, cpf, name, facebookID, image, password
   } = req.body;
 
   const newUser = {};
@@ -80,7 +80,6 @@ router.post('/', (req, res) => {
 
   newUser.image = image;
   newUser.facebookID = facebookID;
-  newUser.forms = forms;
 
   User.addUser(newUser, (err, user) => {
     if(err) {
@@ -93,7 +92,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    id, phone, cpf, name, password, image, facebookID, forms
+    id, phone, cpf, name, password, image, facebookID
   } = req.body;
 
   const updatedUser = {};
@@ -109,7 +108,6 @@ router.put('/', (req, res) => {
   updatedUser.name = name;
   updatedUser.image = image;
   updatedUser.facebookID = facebookID;
-  updatedUser.forms = forms;
 
   User.updateUser(id, updatedUser, (err, user) => {
     if(err) {
@@ -124,12 +122,10 @@ router.put('/forms', (req, res) => {
   const {
     id, forms
   } = req.body;
+  
+  console.log('ooooooooooooooooooo', forms);
 
-  const updatedUser = {};
-
-  updatedUser.forms = forms;
-
-  User.updateFormsUser(id, updatedUser, (err, user) => {
+  User.updateFormsUser(id, forms, (err, user) => {
     if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this user \n');
