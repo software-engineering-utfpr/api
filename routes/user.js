@@ -120,6 +120,24 @@ router.put('/', (req, res) => {
   });
 });
 
+router.put('/forms', (req, res) => {
+  const {
+    id, forms
+  } = req.body;
+
+  const updatedUser = {};
+
+  updatedUser.forms = forms;
+
+  User.updateUser(id, updatedUser, (err, user) => {
+    if(err) {
+      console.log(err);
+      res.status(400).send('Can\'t update this user \n');
+    }
+    res.status(200).json(user);
+  });
+});
+
 router.delete('/:id', (req, res) => {
   User.deleteUser(req.params.id, (err, user) => {
     if(err) {
