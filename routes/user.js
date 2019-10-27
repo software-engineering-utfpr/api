@@ -122,8 +122,6 @@ router.put('/forms', (req, res) => {
   const {
     id, forms
   } = req.body;
-  
-  console.log('ooooooooooooooooooo', forms);
 
   User.updateFormsUser(id, forms, (err, user) => {
     if(err) {
