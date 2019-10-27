@@ -129,7 +129,7 @@ router.put('/forms', (req, res) => {
 
   updatedUser.forms = forms;
 
-  User.updateUser(id, updatedUser, (err, user) => {
+  User.updateFormsUser(id, updatedUser, (err, user) => {
     if(err) {
       console.log(err);
       res.status(400).send('Can\'t update this user \n');

@@ -59,6 +59,16 @@ module.exports.updateUser = (id, updatedUser, callback) => {
   });
 };
 
+module.exports.updateFormsUser = (id, updatedUser, callback) => {
+  User.getUserById(id, (err, user) => {
+    if (err) callback(err, null);
+
+    updatedUser.forms = updatedUser.forms;
+
+    user.save(callback);
+  });
+};
+
 module.exports.deleteUser = (id, callback) => {
   User.deleteOne({ _id: id }, callback);
 };
