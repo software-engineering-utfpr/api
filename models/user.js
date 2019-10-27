@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   facebookID: { type: String, default: '', required: false },
   forms: [{
     form: [{ type: Schema.Types.ObjectId, ref: 'Form' }],
-    status: { type: Date, default: Date.now }
+    visitedAt: { type: Date, default: Date.now }
   }]
 }, { timestamps: true });
 
