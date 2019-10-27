@@ -60,7 +60,6 @@ module.exports.updateUser = (id, updatedUser, callback) => {
 
 module.exports.updateFormsUser = (id, forms, callback) => {
   User.getUserById(id, (err, user) => {
-    console.log(forms, user);
     if(err) callback(err, null);
 
     user.forms = forms;
