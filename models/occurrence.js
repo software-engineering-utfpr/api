@@ -52,7 +52,7 @@ module.exports.addOccurrence = (occurrence, callback) => {
 
 module.exports.updateOccurrence = (id, updateOccurrence, callback) => {
     Occurrence.getOccurrenceById(id, (err, occurrence) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     occurrence.category = updateOccurrence.category ? updateOccurrence.category : occurrence.category;
     occurrence.location = updateOccurrence.location ? updateOccurrence.location : occurrence.location;

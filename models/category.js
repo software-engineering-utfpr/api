@@ -30,7 +30,7 @@ module.exports.addCategory = (category, callback) => {
 
 module.exports.updateCategory = (id, updatedCategory, callback) => {
   Category.getCategoryById(id, (err, category) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     category.title = updatedCategory.title ? updatedCategory.title : category.title;
     category.image = updatedCategory.image ? updatedCategory.image : category.image;

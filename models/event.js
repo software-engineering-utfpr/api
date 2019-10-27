@@ -38,7 +38,7 @@ module.exports.addEvent = (event, callback) => {
 
 module.exports.updateEvent = (id, updateEvent, callback) => {
   Event.getEventById(id, (err, event) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     event.name = updateEvent.name ? updateEvent.name : event.name;
     event.initialDate = updateEvent.initialDate ? updateEvent.initialDate : event.initialDate;

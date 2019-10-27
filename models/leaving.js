@@ -39,7 +39,7 @@ module.exports.addLeaving = (leaving, callback) => {
 
 module.exports.updateLeaving = (id, updatedLeaving, callback) => {
   Leaving.getLeavingById(id, (err, leaving) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     leaving.name = updatedLeaving.name ? updatedLeaving.name : leaving.name;
     leaving.description = updatedLeaving.description ? updatedLeaving.description : leaving.description;

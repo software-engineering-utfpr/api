@@ -41,7 +41,7 @@ module.exports.addGame = (game, callback) => {
 
 module.exports.updateGame = (id, updatedGame, callback) => {
   Game.getGameById(id, (err, game) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     game.appId = updatedGame.appId ? updatedGame.appId : game.appId;
     game.name = updatedGame.name ? updatedGame.name : game.name;

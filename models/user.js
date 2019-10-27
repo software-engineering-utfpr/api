@@ -45,7 +45,7 @@ module.exports.addUser = (user, callback) => {
 
 module.exports.updateUser = (id, updatedUser, callback) => {
   User.getUserById(id, (err, user) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     user.phone = updatedUser.phone ? updatedUser.phone : user.phone;
     user.cpf = updatedUser.cpf ? updatedUser.cpf : user.cpf;
@@ -61,7 +61,7 @@ module.exports.updateUser = (id, updatedUser, callback) => {
 
 module.exports.updateFormsUser = (id, updatedUser, callback) => {
   User.getUserById(id, (err, user) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     user.forms = updatedUser.forms;
 

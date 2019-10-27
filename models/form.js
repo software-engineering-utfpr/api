@@ -34,7 +34,7 @@ module.exports.addForm = (form, callback) => {
 
 module.exports.updateForm = (id, updateForm, callback) => {
   Form.getFormById(id, (err, form) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     form.title = updateForm.title ? updateForm.title : form.title;
     form.description = updateForm.description ? updateForm.description : form.description;

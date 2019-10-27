@@ -37,7 +37,7 @@ module.exports.addManager = (manager, callback) => {
 
 module.exports.updateManager = (id, updatedManager, callback) => {
   Manager.getManagerById(id, (err, manager) => {
-    if (err) callback(err, null);
+    if(err) callback(err, null);
 
     manager.email = updatedManager.email ? updatedManager.email : manager.email;
     manager.name = updatedManager.name ? updatedManager.name : manager.name;
