@@ -8,20 +8,19 @@ const OccurrenceSchema = Schema({
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   location: {
-    notUrbanizedArea: { type: Boolean, required: true },
     latitude: { type: String, required: true },
     longitude: { type: String, required: true },
-    address: { type: String, required: true },
+    address: { type: String },
     city: { type: String, default: 'Campo Mourão', required: true },
     uf: { type: String, enum: UFs, default: 'PR', required: true },
     cep: { type: String },
-    number: { type: Number },
+    number: { type: String },
     referencePoint: { type: String }
   },
   date: { type: Date, required: true },
   photos: [{ type: String }],
-  videos: [{ type: String }],
-  audios: [{ type: String }],
+  videos: { type: String },
+  audios: { type: String },
   description: { type: String }
 }, { timestamps: true });
 
