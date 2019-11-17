@@ -25,13 +25,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    title, image
+    title
   } = req.body;
 
   const newCategory = {};
 
   newCategory.title = title;
-  newCategory.image = image;
 
   Category.addCategory(newCategory, (err, category) => {
     if (err) {
@@ -44,13 +43,12 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    title, image
+    title
   } = req.body;
 
   const updateCategory = {};
 
   updateCategory.title = title;
-  updateCategory.image = image;
 
   Category.updateCategory(id, updateCategory, (err, category) => {
     if (err) {
