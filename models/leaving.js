@@ -8,7 +8,7 @@ const LeavingSchema = new Schema({
   description: { type: String },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
-  image: { type: String, required: true }
+  image: { type: String, default: "https://res.cloudinary.com/dnnkqjrbi/image/upload/v1574190702/noimage_uii7ob.png" }
 }, { timestamps: true });
 
 LeavingSchema.plugin(uniquevalidator);
