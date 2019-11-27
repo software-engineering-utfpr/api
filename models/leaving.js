@@ -8,7 +8,7 @@ const LeavingSchema = new Schema({
   description: { type: String },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
-  image: { type: String, default: "https://res.cloudinary.com/dnnkqjrbi/image/upload/v1574190702/noimage_uii7ob.png" }
+  image: { type: String, default: 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1574190702/noimage_uii7ob.png' }
 }, { timestamps: true });
 
 LeavingSchema.plugin(uniquevalidator);
@@ -45,7 +45,7 @@ module.exports.updateLeaving = (id, updatedLeaving, callback) => {
     leaving.description = updatedLeaving.description ? updatedLeaving.description : leaving.description;
     leaving.latitude = updatedLeaving.latitude ? updatedLeaving.latitude : leaving.latitude;
     leaving.longitude = updatedLeaving.longitude ? updatedLeaving.longitude : leaving.longitude;
-    leaving.image = updatedLeaving.image ? updatedLeaving.image : leaving.image;
+    leaving.image = updatedLeaving.image ? updatedLeaving.image : 'https://res.cloudinary.com/dnnkqjrbi/image/upload/v1574190702/noimage_uii7ob.png';
 
     leaving.save(callback);
   });
