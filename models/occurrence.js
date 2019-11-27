@@ -19,8 +19,7 @@ const OccurrenceSchema = Schema({
   },
   date: { type: Date, required: true },
   photos: [{ type: String }],
-  videos: { type: String },
-  audios: { type: String },
+  video: { type: String },
   description: { type: String }
 }, { timestamps: true });
 
@@ -48,8 +47,7 @@ module.exports.addOccurrence = (occurrence, callback) => {
   newOccurrence.location = occurrence.location;
   newOccurrence.date = occurrence.date;
   newOccurrence.photos = occurrence.photos;
-  newOccurrence.videos = occurrence.videos;
-  newOccurrence.audios = occurrence.audios;
+  newOccurrence.video = occurrence.video;
   newOccurrence.description = occurrence.description;
 
   newOccurrence.save(callback);
@@ -64,8 +62,7 @@ module.exports.updateOccurrence = (id, updateOccurrence, callback) => {
     occurrence.location = updateOccurrence.location ? updateOccurrence.location : occurrence.location;
     occurrence.date = updateOccurrence.date ? updateOccurrence.date : occurrence.date;
     occurrence.photos = updateOccurrence.photos ? updateOccurrence.photos : occurrence.photos;
-    occurrence.videos = updateOccurrence.videos ? updateOccurrence.videos : occurrence.videos;
-    occurrence.audios = updateOccurrence.audios ? updateOccurrence.audios : occurrence.audios;
+    occurrence.video = updateOccurrence.video ? updateOccurrence.video : occurrence.video;
     occurrence.description = updateOccurrence.description ? updateOccurrence.description : occurrence.description;
 
     occurrence.save(callback);
