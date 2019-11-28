@@ -35,7 +35,7 @@ router.get('/user/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const {
-    category, user, location, date, photos, video, description
+    category, user, location, date, photos, video, description, status
   } = req.body;
 
   const newOccurrence = {};
@@ -47,6 +47,7 @@ router.post('/', (req, res) => {
   newOccurrence.photos = photos;
   newOccurrence.video = video;
   newOccurrence.description = description;
+  newOccurrence.status = status;
 
   Occurrence.addOccurrence(newOccurrence, (err, occurrence) => {
     if (err) {
@@ -59,7 +60,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    category, user, location, date, photos, video, description
+    category, user, location, date, photos, video, description, status
   } = req.body;
 
   const updateOccurrence = {};
@@ -71,6 +72,7 @@ router.put('/', (req, res) => {
   updateOccurrence.photos = photos;
   updateOccurrence.video = video;
   updateOccurrence.description = description;
+  updateOccurrence.status = status;
 
   Occurrence.updateOccurrence(id, updateOccurrence, (err, occurrence) => {
     if (err) {

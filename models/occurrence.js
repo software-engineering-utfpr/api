@@ -20,7 +20,8 @@ const OccurrenceSchema = Schema({
   date: { type: Date, required: true },
   photos: [{ type: String }],
   video: { type: String },
-  description: { type: String }
+  description: { type: String },
+  status: { type: String, default: 'pending' }
 }, { timestamps: true });
 
 const Occurrence = mongoose.model('Occurrence', OccurrenceSchema, 'Occurrences');
@@ -49,6 +50,7 @@ module.exports.addOccurrence = (occurrence, callback) => {
   newOccurrence.photos = occurrence.photos;
   newOccurrence.video = occurrence.video;
   newOccurrence.description = occurrence.description;
+  newOccurrence.status = occurrence.status;
 
   newOccurrence.save(callback);
 };
@@ -64,6 +66,7 @@ module.exports.updateOccurrence = (id, updateOccurrence, callback) => {
     occurrence.photos = updateOccurrence.photos ? updateOccurrence.photos : occurrence.photos;
     occurrence.video = updateOccurrence.video ? updateOccurrence.video : occurrence.video;
     occurrence.description = updateOccurrence.description ? updateOccurrence.description : occurrence.description;
+    occurrence.status = updateOccurrence.status ? updateOccurrence.status : occurrence.status;
 
     occurrence.save(callback);
   });
