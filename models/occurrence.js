@@ -50,7 +50,6 @@ module.exports.addOccurrence = (occurrence, callback) => {
   newOccurrence.photos = occurrence.photos;
   newOccurrence.video = occurrence.video;
   newOccurrence.description = occurrence.description;
-  newOccurrence.status = occurrence.status;
 
   newOccurrence.save(callback);
 };
