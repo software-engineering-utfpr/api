@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    category, user, location, date, photos, video, description, status
+    id, category, user, location, date, photos, video, description, status
   } = req.body;
 
   const updateOccurrence = {};
