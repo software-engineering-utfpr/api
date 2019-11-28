@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const {
-    title
+    title, id
   } = req.body;
 
   const updateCategory = {};
